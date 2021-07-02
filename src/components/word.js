@@ -20,36 +20,58 @@ const Word = (props) => {
   }
 
   return (
-    <Form>
-      <FormGroup>
-        <Label>Word</Label>
-        <AudioPlayer
-          audioUrl={props.currentWord.wordAudioUrl}
-          autoPlay={true}
-        />
-      </FormGroup>
+    <Container>
+      <Row>
+        <Col>
+          <Label>Word</Label>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <AudioPlayer
+            audioUrl={props.currentWord.wordAudioUrl}
+            autoPlay={true}
+          />
+        </Col>
+      </Row>
 
-      <FormGroup>
-        <Label>Defintion</Label>
+      <Row>
+        <Col>
+          <Label>Defintion</Label>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <AudioPlayer
+            audioUrl={props.currentWord.defintionAudioUrl}
+            autoPlay={false}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Label>Example</Label>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <AudioPlayer
+            audioUrl={props.currentWord.exampleAudioUrl}
+            autoPlay={false}
+          />
+        </Col>
+      </Row>
 
-        <AudioPlayer
-          audioUrl={props.currentWord.defintionAudioUrl}
-          autoPlay={false}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Example</Label>
-        <AudioPlayer
-          audioUrl={props.currentWord.exampleAudioUrl}
-          autoPlay={false}
-        />
-      </FormGroup>
-      <Input
-        type="text"
-        placeholder="Type your spelling here"
-        spellCheck="false"
-      />
-    </Form>
+      <Row>
+        <Col>
+          <Input
+            type="text"
+            placeholder="Type your spelling here"
+            spellCheck="false"
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
