@@ -13,12 +13,6 @@ import {
 import AudioPlayer from "./audioplayer";
 
 const Word = (props) => {
-  const audioControlRef = useRef();
-
-  if (audioControlRef.current) {
-    audioControlRef.current.load();
-  }
-
   return (
     <Container>
       <Row>

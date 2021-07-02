@@ -4,6 +4,7 @@ import { Button, Container, Col, Row, Progress,Input } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Word from "./word";
+import UserAnswer from "./useranswer";
 
 export const useGetData = (numberRandomRecords) => {
   const [documents, setDocuments] = React.useState([]);
@@ -44,14 +45,19 @@ const SpellTest = () => {
   const [buttonText, setButtonText] = useState("Next");
   const [buttonClass, setButtonClass] = useState("primary");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [results, setResults] = useState([]);
+  const [userAnswer, setUserAnswer] = useState();
 
   const moveToNextWord = () => {
+    console.log(`user answer is: ${userAnswer}`);
     setCurrentIndex(currentIndex+1);
     if (currentIndex === totalWordsInATest - 2) {
       setButtonText("Done");
       setButtonClass("success");
     } 
   };
+
+
 
   if (data.length > 0) {
     return (
@@ -63,18 +69,14 @@ const SpellTest = () => {
         </Row>
         <Row>
         <Col>
-          <Input
-            type="text"
-            placeholder="Enter Spelling"
-            spellCheck="false"
-            className="input-lg"
-          />
+          <UserAnswer/>
+          <br/>
         </Col>
       </Row>
-      <Row><Col> {  }</Col></Row>
         <Row>
           <Col>
             <Progress value={currentIndex+1} max={totalWordsInATest}>{currentIndex+1} of {totalWordsInATest}</Progress>
+            <br/>
           </Col>
         </Row>
         <Row>
