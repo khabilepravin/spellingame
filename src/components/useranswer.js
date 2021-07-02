@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Col, Row, Progress,Input } from "reactstrap";
+import { Input } from "reactstrap";
 
 const UserAnswer = () => {
   const [userAnswer, setUserAnswer] = useState();

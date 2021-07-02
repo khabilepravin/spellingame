@@ -1,45 +1,16 @@
 import React, { useState } from "react";
-import firebase from "firebase";
+import { useHistory } from "react-router-dom";
+
 import { Button, Container, Col, Row, Progress,Input } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Word from "./word";
 import UserAnswer from "./useranswer";
+import { useGetData } from "../useGetDataHook";
 
-export const useGetData = (numberRandomRecords) => {
-  const [documents, setDocuments] = React.useState([]);
-  const db = firebase.firestore();
-  const max = 871;
-  let recordIndexes = [];
-  for (let i = 0; i < numberRandomRecords; i++) {
-    recordIndexes.push(getRandomInt(max));
-  }
-
-  React.useEffect(() => {
-    db.collection("spellingwords")
-      .get()
-      .then((querySnapshot) => {
-        let arr = [];
-        querySnapshot.docs.map((doc) =>
-          arr.push({ id: doc.id, value: doc.data() })
-        );
-
-        let resultArr = [];
-        recordIndexes.map((i) => {
-          resultArr.push({ wordData: arr[i].value });
-        });
-
-        setDocuments(resultArr);
-      });
-  }, [db]);
-  return [documents];
-};
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
 
 const SpellTest = () => {
+  const history = useHistory();
   const totalWordsInATest = 10;
   const [data] = useGetData(totalWordsInATest);
   const [buttonText, setButtonText] = useState("Next");
@@ -52,12 +23,11 @@ const SpellTest = () => {
     console.log(`user answer is: ${userAnswer}`);
     setCurrentIndex(currentIndex+1);
     if (currentIndex === totalWordsInATest - 2) {
+      history.push('/result');
       setButtonText("Done");
       setButtonClass("success");
     } 
   };
-
-
 
   if (data.length > 0) {
     return (
