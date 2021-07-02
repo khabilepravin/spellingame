@@ -62,15 +62,6 @@ const Word = (props) => {
         </Col>
       </Row>
 
-      <Row>
-        <Col>
-          <Input
-            type="text"
-            placeholder="Type your spelling here"
-            spellCheck="false"
-          />
-        </Col>
-      </Row>
     </Container>
   );
 };

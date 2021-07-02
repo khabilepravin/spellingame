@@ -8,10 +8,12 @@ const AudioPlayer = (props) => {
     audioControlRef.current.load();
   }
 
-  console.log(props.audioUrl);
-
   if (props.audioUrl === null) {
-    return <Badge color="warning">Not Available</Badge>;
+    return (
+      <Badge color="primary" pill>
+        Not Available
+      </Badge>
+    );
   } else {
     return (
       <audio controls autoPlay={props.autoPlay} ref={audioControlRef}>

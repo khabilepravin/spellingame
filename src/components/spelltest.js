@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import firebase from "firebase";
-import { Button, Input, Container } from "reactstrap";
+import { Button, Container, Col, Row, Progress,Input } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faForward } from "@fortawesome/free-solid-svg-icons";
-import  Word  from "./word";
+import { faForward, faCheck } from "@fortawesome/free-solid-svg-icons";
+import Word from "./word";
 
 export const useGetData = (numberRandomRecords) => {
   const [documents, setDocuments] = React.useState([]);
@@ -13,18 +13,18 @@ export const useGetData = (numberRandomRecords) => {
   for (let i = 0; i < numberRandomRecords; i++) {
     recordIndexes.push(getRandomInt(max));
   }
-  
+
   React.useEffect(() => {
     db.collection("spellingwords")
       .get()
       .then((querySnapshot) => {
-        let arr = [];        
+        let arr = [];
         querySnapshot.docs.map((doc) =>
           arr.push({ id: doc.id, value: doc.data() })
         );
-        
+
         let resultArr = [];
-        recordIndexes.map((i) => {         
+        recordIndexes.map((i) => {
           resultArr.push({ wordData: arr[i].value });
         });
 
@@ -39,20 +39,51 @@ function getRandomInt(max) {
 }
 
 const SpellTest = () => {
-  const [data] = useGetData(10);
-  const[currentIndex, setCurrentIndex] = useState(0);
+  const totalWordsInATest = 10;
+  const [data] = useGetData(totalWordsInATest);
+  const [buttonText, setButtonText] = useState("Next");
+  const [buttonClass, setButtonClass] = useState("primary");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const moveToNextWord = () => {
     setCurrentIndex(currentIndex+1);
+    if (currentIndex === totalWordsInATest - 2) {
+      setButtonText("Done");
+      setButtonClass("success");
+    } 
   };
-  
+
   if (data.length > 0) {
     return (
-      <Container>      
-         <Word currentWord={data[currentIndex].wordData}/>
-        <Button color="primary" onClick={moveToNextWord}>
-          <FontAwesomeIcon icon={faForward} /> Next
-        </Button>
+      <Container>
+        <Row>
+          <Col>
+            <Word currentWord={data[currentIndex].wordData} />
+          </Col>
+        </Row>
+        <Row>
+        <Col>
+          <Input
+            type="text"
+            placeholder="Enter Spelling"
+            spellCheck="false"
+            className="input-lg"
+          />
+        </Col>
+      </Row>
+      <Row><Col> {  }</Col></Row>
+        <Row>
+          <Col>
+            <Progress value={currentIndex+1} max={totalWordsInATest}>{currentIndex+1} of {totalWordsInATest}</Progress>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button color={buttonClass} onClick={moveToNextWord}>
+              <FontAwesomeIcon icon={buttonText == 'Done' ? faCheck : faForward} /> {buttonText}
+            </Button>
+          </Col>
+        </Row>
       </Container>
     );
   } else {
