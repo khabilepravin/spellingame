@@ -1,20 +1,55 @@
-import React,{ useRef} from "react";
+import React, { useRef } from "react";
 
-import { Button, Input } from "reactstrap";
+import {
+  Button,
+  Input,
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+} from "reactstrap";
+import AudioPlayer from "./audioplayer";
 
 const Word = (props) => {
-  const audioRef = useRef();
+  const audioControlRef = useRef();
 
-  audioRef.current.load();
+  if (audioControlRef.current) {
+    audioControlRef.current.load();
+  }
 
   return (
-    <>
-      <audio controls autoPlay ref={audioRef}>
-        <source src={props.currentWord.wordAudioUrl} type="audio/mp3" />
-      </audio>
-      <h4>{props.currentWord.defintion}</h4>
-      <Input type="text" placeholder="Type your spelling here" />
-    </>
+    <Form>
+      <FormGroup>
+        <Label>Word</Label>
+        <AudioPlayer
+          audioUrl={props.currentWord.wordAudioUrl}
+          autoPlay={true}
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <Label>Defintion</Label>
+
+        <AudioPlayer
+          audioUrl={props.currentWord.defintionAudioUrl}
+          autoPlay={false}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>Example</Label>
+        <AudioPlayer
+          audioUrl={props.currentWord.exampleAudioUrl}
+          autoPlay={false}
+        />
+      </FormGroup>
+      <Input
+        type="text"
+        placeholder="Type your spelling here"
+        spellCheck="false"
+      />
+    </Form>
   );
 };
 

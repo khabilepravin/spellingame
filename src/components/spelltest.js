@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import firebase from "firebase";
-import { Button, Input } from "reactstrap";
+import { Button, Input, Container } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
 import  Word  from "./word";
@@ -44,18 +44,16 @@ const SpellTest = () => {
 
   const moveToNextWord = () => {
     setCurrentIndex(currentIndex+1);
-  //  console.log(currentIndex);
-    //console.log(data[currentIndex]);
   };
   
   if (data.length > 0) {
     return (
-      <div>      
+      <Container>      
          <Word currentWord={data[currentIndex].wordData}/>
         <Button color="primary" onClick={moveToNextWord}>
           <FontAwesomeIcon icon={faForward} /> Next
         </Button>
-      </div>
+      </Container>
     );
   } else {
     return <h3>Loading...</h3>;
