@@ -1,13 +1,13 @@
 
 import './App.css';
 
-import Spell from './components/spell';
+import SpellTest from './components/spelltest';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Spell/>
+        <SpellTest/>
       </header>
     </div>
   );
