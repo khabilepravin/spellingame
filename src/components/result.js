@@ -1,5 +1,7 @@
 import React from "react";
 import { Table,Badge } from 'reactstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
 const Result = (props) =>{
@@ -10,15 +12,19 @@ const Result = (props) =>{
                 <tr>
                     <th>Correct Spelling</th>
                     <th>Your Answer</th>
+                    <th>Is Correct</th>
                 </tr>
             </thead>
             <tbody>
             {props.location.state.map((result) =>{
                 return (
                   <tr key={result.word}>
-                    <th>{result.word}</th>
+                    <th><Badge color="success">{result.word}</Badge></th>
                     <th>
-                      <Badge>{result.userEnteredAnswer}</Badge>
+                      <Badge color={result.isCorrect ? "primary" : "danger"}>{result.userEnteredAnswer}</Badge>
+                    </th>
+                    <th>
+                        <FontAwesomeIcon icon={result.isCorrect ? faCheck : faTimes} color="primary"/>
                     </th>
                   </tr>
                 );

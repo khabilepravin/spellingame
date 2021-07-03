@@ -10,7 +10,7 @@ const AudioPlayer = React.memo((props) => {
 
   if (props.audioUrl === null) {
     return (
-      <Badge color="primary" pill>
+      <Badge color="warning" pill>
         Not Available
       </Badge>
     );
