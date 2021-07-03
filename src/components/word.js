@@ -27,7 +27,7 @@ const Word = React.memo((props) => {
 
       <Row>
         <Col>
-          <Label>Defintion</Label>
+          <Label>Definition</Label>
         </Col>
       </Row>
       <Row>
