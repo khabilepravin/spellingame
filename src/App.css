@@ -32,3 +32,8 @@
 {
   font-size: 32px;
 }
+
+.strike-through
+{
+  text-decoration:line-through;
+}

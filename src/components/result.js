@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from 'reactstrap';
+import { Table,Badge } from 'reactstrap';
 
 
 const Result = (props) =>{
@@ -12,12 +12,18 @@ const Result = (props) =>{
                     <th>Your Answer</th>
                 </tr>
             </thead>
+            <tbody>
             {props.location.state.map((result) =>{
-                return <tr>
+                return (
+                  <tr key={result.word}>
                     <th>{result.word}</th>
-                    <th>{result.userEnteredAnswer}</th>
-                </tr>;
+                    <th>
+                      <Badge>{result.userEnteredAnswer}</Badge>
+                    </th>
+                  </tr>
+                );
             } )}
+            </tbody>
         </Table>
         
     }

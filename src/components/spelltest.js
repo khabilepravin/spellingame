@@ -5,7 +5,7 @@ import { Button, Container, Col, Row, Progress, Input } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Word from "./word";
-import UserAnswer from "./useranswer";
+
 import { useGetData } from "../useGetDataHook";
 
 export const verifyIfCorrect = (word, userAnswer) => {
