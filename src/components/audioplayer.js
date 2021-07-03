@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Badge } from "reactstrap";
 
-const AudioPlayer = (props) => {
+const AudioPlayer = React.memo((props) => {
   const audioControlRef = useRef();
 
   if (audioControlRef.current) {
@@ -21,6 +21,6 @@ const AudioPlayer = (props) => {
       </audio>
     );
   }
-};
+});
 
 export default AudioPlayer;

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Button, Container, Col, Row, Progress,Input } from "reactstrap";
+import { Button, Container, Col, Row, Progress, Input } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Word from "./word";
 import UserAnswer from "./useranswer";
 import { useGetData } from "../useGetDataHook";
 
-
 const SpellTest = () => {
   const history = useHistory();
+  const userAnswerRef = useRef(null);
   const totalWordsInATest = 10;
   const [data] = useGetData(totalWordsInATest);
   const [buttonText, setButtonText] = useState("Next");
@@ -20,13 +20,20 @@ const SpellTest = () => {
   const [userAnswer, setUserAnswer] = useState();
 
   const moveToNextWord = () => {
-    console.log(`user answer is: ${userAnswer}`);
-    setCurrentIndex(currentIndex+1);
+    setCurrentIndex(currentIndex + 1);
+    setUserAnswer('');
+    setResults(results => [...results, { word: data[currentIndex].wordData.word, userEnteredAnswer: userAnswer }]);
+    console.log(results);
+
     if (currentIndex === totalWordsInATest - 2) {
-      history.push('/result');
+      history.push("/result");
       setButtonText("Done");
       setButtonClass("success");
-    } 
+    }
+  };
+
+  const handleUserAnswer = (event) =>{
+    setUserAnswer(event.target.value);
   };
 
   if (data.length > 0) {
@@ -34,25 +41,40 @@ const SpellTest = () => {
       <Container>
         <Row>
           <Col>
+          <br/>
             <Word currentWord={data[currentIndex].wordData} />
+            <br />
           </Col>
         </Row>
         <Row>
-        <Col>
-          <UserAnswer/>
-          <br/>
-        </Col>
-      </Row>
+          <Col>
+            <Input
+              type="text"
+              placeholder="Enter Spelling"
+              spellCheck="false"
+              className="input-lg"
+              ref={userAnswerRef}
+              value={userAnswer}
+              onChange={handleUserAnswer}
+            />
+            <br />
+          </Col>
+        </Row>
         <Row>
           <Col>
-            <Progress value={currentIndex+1} max={totalWordsInATest}>{currentIndex+1} of {totalWordsInATest}</Progress>
-            <br/>
+            <Progress value={currentIndex + 1} max={totalWordsInATest}>
+              {currentIndex + 1} of {totalWordsInATest}
+            </Progress>
+            <br />
           </Col>
         </Row>
         <Row>
           <Col>
             <Button color={buttonClass} onClick={moveToNextWord}>
-              <FontAwesomeIcon icon={buttonText == 'Done' ? faCheck : faForward} /> {buttonText}
+              <FontAwesomeIcon
+                icon={buttonText == "Done" ? faCheck : faForward}
+              />{" "}
+              {buttonText}
             </Button>
           </Col>
         </Row>
