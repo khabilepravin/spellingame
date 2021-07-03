@@ -1,14 +1,19 @@
 import React from "react";
-import { Table, Badge } from "reactstrap";
+import { Table, Badge , Button} from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faCheck, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 //import ResultPie from "./resultpie";
 
 const Result = (props) => {
+  const history = useHistory();
+  const handleNewGameClick = () => {
+    history.push("/");
+  };
+
   if (props.location.state) {
     return (
       <>
-        {/* <ResultPie /> */}
         <Table>
           <thead>
             <tr>
@@ -40,6 +45,7 @@ const Result = (props) => {
             })}
           </tbody>
         </Table>
+        <Button color="primary"  onClick={handleNewGameClick}><FontAwesomeIcon icon={faGamepad}/> New Game</Button>    
       </>
     );
   } else {
