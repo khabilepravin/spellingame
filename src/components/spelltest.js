@@ -68,6 +68,9 @@ const SpellTest = () => {
               type="text"
               placeholder="Enter Spelling"
               spellCheck="false"
+              autoComplete="false"
+              autoCorrect="false"
+              autoCapitalize="false"
               className="input-lg"
               ref={userAnswerRef}
               value={userAnswer}
