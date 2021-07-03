@@ -30,7 +30,7 @@ const SpellTest = () => {
   const [buttonClass, setButtonClass] = useState("primary");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState([]);
-  const [userAnswer, setUserAnswer] = useState();
+  const [userAnswer, setUserAnswer] = useState('');
 
   const moveToNextWord = () => {
     setCurrentIndex(currentIndex + 1);

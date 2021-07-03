@@ -3,7 +3,6 @@ import { Table, Badge , Button} from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faCheck, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-//import ResultPie from "./resultpie";
 
 const Result = (props) => {
   const history = useHistory();
@@ -17,9 +16,9 @@ const Result = (props) => {
         <Table>
           <thead>
             <tr>
-              <th>Correct Spelling</th>
+              <th>Spelling</th>
               <th>Your Answer</th>
-              <th>Is Correct</th>
+              <th>Result</th>
             </tr>
           </thead>
           <tbody>
