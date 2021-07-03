@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import AudioPlayer from "./audioplayer";
 
-const Word = (props) => {
+const Word = React.memo((props) => {
   return (
     <Container>
       <Row>
@@ -58,6 +58,6 @@ const Word = (props) => {
 
     </Container>
   );
-};
+});
 
 export default Word;

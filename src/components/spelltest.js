@@ -8,6 +8,19 @@ import Word from "./word";
 import UserAnswer from "./useranswer";
 import { useGetData } from "../useGetDataHook";
 
+export const verifyIfCorrect = (word, userAnswer) => {
+  if (word && userAnswer) {
+    if (word.toUpperCase() == userAnswer.toUpperCase()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  else{
+      return false;
+  }
+};
+
 const SpellTest = () => {
   const history = useHistory();
   const userAnswerRef = useRef(null);
@@ -22,13 +35,16 @@ const SpellTest = () => {
   const moveToNextWord = () => {
     setCurrentIndex(currentIndex + 1);
     setUserAnswer('');
-    setResults(results => [...results, { word: data[currentIndex].wordData.word, userEnteredAnswer: userAnswer }]);
-    console.log(results);
+    let isCorrect = verifyIfCorrect(data[currentIndex].wordData.word, userAnswer);
+    setResults(results => [...results, { word: data[currentIndex].wordData.word, userEnteredAnswer: userAnswer, isCorrect: isCorrect }]);
 
-    if (currentIndex === totalWordsInATest - 2) {
-      history.push("/result");
+    if(currentIndex === totalWordsInATest -2) {
       setButtonText("Done");
       setButtonClass("success");
+    }
+
+    if (currentIndex === totalWordsInATest - 1) {
+      history.push("/result", results);
     }
   };
 
