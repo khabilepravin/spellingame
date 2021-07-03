@@ -31,21 +31,26 @@ const SpellTest = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
-
+  
   const moveToNextWord = () => {
-    setCurrentIndex(currentIndex + 1);
     setUserAnswer('');
     let isCorrect = verifyIfCorrect(data[currentIndex].wordData.word, userAnswer);
     setResults(results => [...results, { word: data[currentIndex].wordData.word, userEnteredAnswer: userAnswer, isCorrect: isCorrect }]);
+
+    setCurrentIndex(currentIndex + 1);
 
     if(currentIndex === totalWordsInATest -2) {
       setButtonText("Done");
       setButtonClass("success");
     }
 
-    if (currentIndex === totalWordsInATest - 1) {
-      history.push("/result", results);
-    }
+     if (currentIndex === totalWordsInATest - 1) {
+       let finalResult = results.slice();
+       // Push the last item before redirecting
+      let isCorrect = verifyIfCorrect(data[currentIndex].wordData.word, userAnswer); 
+      finalResult.push({ word: data[currentIndex].wordData.word, userEnteredAnswer: userAnswer, isCorrect: isCorrect });
+      history.push("/result", finalResult);
+     }
   };
 
   const handleUserAnswer = (event) =>{
