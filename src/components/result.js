@@ -18,7 +18,6 @@ const Result = (props) => {
             <tr>
               <th>Spelling</th>
               <th>Your Answer</th>
-              <th>Result</th>
             </tr>
           </thead>
           <tbody>
@@ -26,14 +25,12 @@ const Result = (props) => {
               return (
                 <tr key={result.word}>
                   <th>
-                    <Badge color="success">{result.word}</Badge>
+                    <Badge color="success"><h6>{result.word}</h6></Badge>
                   </th>
                   <th>
                     <Badge color={result.isCorrect ? "primary" : "danger"}>
-                      {result.userEnteredAnswer}
-                    </Badge>
-                  </th>
-                  <th>
+                      <h6>{result.userEnteredAnswer}</h6>
+                    </Badge> { }
                     <FontAwesomeIcon
                       icon={result.isCorrect ? faCheck : faTimes}
                       color="primary"
