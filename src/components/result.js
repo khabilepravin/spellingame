@@ -13,6 +13,7 @@ const Result = (props) => {
   if (props.location.state) {
     return (
       <>
+      <Button color="primary"  onClick={handleNewGameClick}><FontAwesomeIcon icon={faGamepad}/> New Game</Button>    
         <Table>
           <thead>
             <tr>
@@ -41,11 +42,18 @@ const Result = (props) => {
             })}
           </tbody>
         </Table>
-        <Button color="primary"  onClick={handleNewGameClick}><FontAwesomeIcon icon={faGamepad}/> New Game</Button>    
       </>
     );
   } else {
-    return <h2>No results </h2>;
+    return (
+      <>
+        {" "}
+        <Button color="primary" onClick={handleNewGameClick}>
+          <FontAwesomeIcon icon={faGamepad} /> New Game
+        </Button>{" "}
+        <h2>No results </h2>
+      </>
+    );
   }
 };
 
