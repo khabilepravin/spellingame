@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Button, Container, Col, Row, Progress, Input, Form } from "reactstrap";
+import { Button, Container, Col, Row, Progress, Input, Form, Badge } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Word from "./word";
@@ -91,10 +91,10 @@ const SpellTest = () => {
                 type="text"
                 placeholder="Enter Spelling"
                 spellCheck="false"
-                autoComplete="false"
-                autoCorrect="false"
-                autoCapitalize="false"
-                autoFocus="true"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                autoFocus={true}
                 className="input-lg"
                 ref={userAnswerRef}
                 value={userAnswer}
@@ -106,7 +106,7 @@ const SpellTest = () => {
           <Row>
             <Col>
               <Progress value={currentIndex + 1} max={totalWordsInATest}>
-                {currentIndex + 1} of {totalWordsInATest}
+                <span color="danger">{currentIndex + 1} of {totalWordsInATest}</span>
               </Progress>
               <br />
             </Col>
