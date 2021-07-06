@@ -2,7 +2,7 @@ import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpellCheck } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "reactstrap";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch,Link } from "react-router-dom";
 
 import SpellTest from "./components/spelltest";
 import Result from "./components/result";
@@ -15,7 +15,7 @@ function App() {
         <header className="App-header">
           <Row>
             <Col>
-              <FontAwesomeIcon icon={faSpellCheck} /> Spell
+              <FontAwesomeIcon icon={faSpellCheck} /> <Link to="/">Spell</Link>
             </Col>
           </Row>
         </header>
